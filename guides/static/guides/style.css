@@ -1,0 +1,88 @@
+body .mdl-layout__container {
+    position: static;
+}
+
+.main-sector-1 section {
+    display: flex;
+	flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+main.mdl-layout__content {
+    min-height: 100vh;
+    overflow-y: hidden;
+}
+
+main .mdl-layout__container {
+    grid-area: menu;
+}
+
+.page-content {
+    grid-area: main;
+}
+
+.pagination {
+    margin: 20px auto;
+    grid-area: pagination;
+}
+
+main.mdl-layout__content {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 220px auto;
+    grid-template-areas:
+        "menu main"
+        "menu pagination";
+}
+
+@media (min-width: 1px) and (max-width: 1000px) {
+
+    main.mdl-layout__content {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 50px auto;
+        grid-template-areas:
+            "menu main"
+            "menu pagination";
+    }
+
+    main .mdl-layout__container {
+        width: 1000px;
+    }
+}
+
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+  margin: 20px;
+}
+
+.mdl-card__actions button {
+    float: right;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination a:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.pagination a:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+.pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+ }
