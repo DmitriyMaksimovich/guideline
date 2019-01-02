@@ -35,21 +35,11 @@ class SortedIndexView(IndexView):
             guides = []
         return guides
 
-    def get_context_data(self, **kwargs):
-        context = super(SortedIndexView, self).get_context_data(**kwargs)
-        context['sections'] = Section.objects.order_by('guides_in_section')[:10]
-        return context
-
 
 class SectionView(IndexView):
     def get_queryset(self):
         section = self.kwargs.get('section', None)
         return Guide.objects.filter(section=section).order_by("-votes")
-
-    def get_context_data(self, **kwargs):
-        context = super(SectionView, self).get_context_data(**kwargs)
-        context['sections'] = Section.objects.order_by('guides_in_section')[:10]
-        return context
 
 
 class SectionBrowserView(generic.ListView):
@@ -59,11 +49,6 @@ class SectionBrowserView(generic.ListView):
 
     def get_queryset(self):
         return Section.objects.order_by("-guides_in_section")
-
-    def get_context_data(self, **kwargs):
-        context = super(SectionBrowserView, self).get_context_data(**kwargs)
-        context['sections'] = Section.objects.order_by('guides_in_section')[:10]
-        return context
 
 
 class GuideView(generic.DetailView):
