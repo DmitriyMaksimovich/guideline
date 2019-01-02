@@ -123,6 +123,7 @@
             {% endif %}
 
             {% if page_obj.number|add:'-4' > 1 %}
+            <a href="?page=1">1</a>
             <a href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a>
             {% endif %}
 
@@ -136,6 +137,7 @@
 
             {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
             <a href="?page={{ page_obj.number|add:'5' }}">&hellip;</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
             {% endif %}
 
             {% if page_obj.has_next %}
