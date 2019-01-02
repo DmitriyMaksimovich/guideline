@@ -2,10 +2,12 @@ body .mdl-layout__container {
     position: static;
 }
 
-.main-sector-1 section {
+.main-sector-1 {
     display: flex;
 	flex-flow: row wrap;
     justify-content: flex-start;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 main.mdl-layout__content {
@@ -64,26 +66,34 @@ main.mdl-layout__content {
 .pagination a {
     color: black;
     float: left;
-    padding: 8px 16px;
+    padding: 8px 15px;
     text-decoration: none;
     transition: background-color .3s;
     border: 1px solid #ddd;
-}
-
-.pagination a:first-child {
-    border-radius: 4px 0 0 4px;
-}
-
-.pagination a:last-child {
-    border-radius: 0 4px 4px 0;
+    border-radius: 50%;
+    margin: 0px 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .pagination a.active {
-    background-color: dodgerblue;
+    background-color: #01579B;
     color: white;
-    border-color: dodgerblue;
+    border-color: #01579B;
 }
 
 .pagination a:hover:not(.active) {
     background-color: #ddd;
- }
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+a.chip__text {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #BDBDBD;
+    margin: 10px 10px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
