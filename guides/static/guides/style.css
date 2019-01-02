@@ -81,6 +81,7 @@ main.mdl-layout__content {
 .pagination a.active {
     background-color: dodgerblue;
     color: white;
+    border-color: dodgerblue;
 }
 
 .pagination a:hover:not(.active) {

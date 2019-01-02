@@ -114,12 +114,37 @@
             </div>
         </div>
 
+        {% if is_paginated %}
         <div class="pagination">
-            <a href="#" class="page-button page-prev">&laquo;</a>
-            <a href="#" class="page-button page-first">1</a>
-            <a href="#" class="page-button page-last">9</a>
-            <a href="#" class="page-button page-next">&raquo;</a>
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-button">&laquo;</a>
+            {% else %}
+            <a href="" class="page-button disabled">&laquo;</a>
+            {% endif %}
+
+            {% if page_obj.number|add:'-4' > 1 %}
+            <a href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <a href="#" class="page-button active">{{ i }}</a>
+            {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+            <a href="?page={{ i }}">{{ i }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+            <a href="?page={{ page_obj.number|add:'5' }}">&hellip;</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="page-button">&raquo;</a>
+            {% else %}
+            <a href="" class="disabled page-button">&raquo;</a>
+            {% endif %}
         </div>
+        {% endif %}
     </main>
 </div>
 

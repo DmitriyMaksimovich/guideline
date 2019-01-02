@@ -5,15 +5,17 @@ from .models import Guide, Section
 
 
 class IndexView(generic.ListView):
+    model = Guide
     template_name = 'guides/index.html'
+    context_object_name = 'guides_list'
+    paginate_by = 20
 
     def get_queryset(self):
-        return
+        return Guide.objects.order_by("-votes")
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['sections'] = Section.objects.order_by('guides_in_section')[:10]
-        context['guides_list'] = Guide.objects.order_by("-votes")[:10]
         return context
 
 
