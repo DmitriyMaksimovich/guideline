@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^sections_browser/$', views.SectionBrowserView.as_view(), name='sections_browser'),
     url(r'^(?P<pk>[0-9]+)/$', views.GuideView.as_view(), name='guide'),
     url(r'^about_us/$', views.about_us_view, name='about_us'),
+    url(r'^signup/$', views.SignUpView.as_view(), name='signup'),
 ]
