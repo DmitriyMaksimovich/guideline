@@ -1,14 +1,15 @@
 from django.views import generic
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
 import datetime
 from .models import Guide, Section
 
 
 class IndexView(generic.ListView):
-    model = Guide
     template_name = 'guides/index.html'
     context_object_name = 'guides_list'
-    paginate_by = 3
+    paginate_by = 15
 
     def get_queryset(self):
         return Guide.objects.order_by("-votes")
@@ -42,7 +43,7 @@ class SectionView(IndexView):
         return Guide.objects.filter(section=section).order_by("-votes")
 
 
-class SectionBrowserView(generic.ListView):
+class SectionBrowserView(IndexView):
     paginate_by = None
     template_name = 'guides/sections_browser.html'
     context_object_name = 'sections_list'
@@ -59,3 +60,9 @@ class GuideView(generic.DetailView):
 
 def about_us_view(request):
     return render(request, 'guides/about_us.html', {})
+
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'guides/signup.html'
