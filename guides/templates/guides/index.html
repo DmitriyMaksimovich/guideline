@@ -30,12 +30,12 @@
                 </button>
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
                     for="demo-menu-lower-left">
-                    <li class="mdl-menu__item"><a href="{% url 'accounts:logout' %}">Logout</a></li>
-                    <li class="mdl-menu__item"><a href="{% url 'accounts:password_reset' %}">Reset password</a></li>
+                    <li class="mdl-menu__item"><a href="{% url 'logout' %}">Logout</a></li>
+                    <li class="mdl-menu__item"><a href="{% url 'password_reset' %}">Reset password</a></li>
                 </ul>
                 <span class="mdl-navigation__link">Hi, {{ user.username }}</span>
                 {% else %}
-                <a class="mdl-navigation__link" href="{% url 'accounts:login' %}">Login</a>
+                <a class="mdl-navigation__link" href="{% url 'login' %}">Login</a>
                 {% endif %}
                 <a class="mdl-navigation__link" href="{% url 'guides:about_us' %}">About site</a>
             </nav>

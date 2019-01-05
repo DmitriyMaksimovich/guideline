@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^section/(?P<section>[\w]+)/$', views.SectionView.as_view(), name='section'),
     url(r'^sections_browser/$', views.SectionBrowserView.as_view(), name='sections_browser'),
     url(r'^(?P<pk>[0-9]+)/$', views.GuideView.as_view(), name='guide'),
-    url(r'^about_us/$', views.about_us_view, name='about_us'),
+    url(r'^about_us/$', views.AboutUsView.as_view(), name='about_us'),
 ]

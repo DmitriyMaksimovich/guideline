@@ -56,7 +56,5 @@ class GuideView(generic.DetailView):
     context_object_name = 'guide'
 
 
-def about_us_view(request):
-    return render(request, 'guides/about_us.html', {})
-
-
+class AboutUsView(generic.TemplateView):
+    template_name = 'guides/about_us.html'
