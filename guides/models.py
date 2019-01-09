@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import CustomUser
 
 
 class Section(models.Model):
@@ -21,6 +22,7 @@ class Guide(models.Model):
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
+    user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted')
 
     def __str__(self):
         return "{} by {}".format(self.guide_name, self.author)
