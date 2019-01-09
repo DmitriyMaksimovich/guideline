@@ -2,6 +2,11 @@ body .mdl-layout__container {
     position: static;
 }
 
+.mdl-layout__header-row a {
+    text-decoration: none;
+    color: white;
+}
+
 .main-sector-1 {
     display: flex;
 	flex-flow: row wrap;

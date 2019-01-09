@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['sections'] = Section.objects.order_by('guides_in_section')[:10]
-        context['is_logged'] = self.user_is_logged
+        context['user_is_logged'] = self.user_is_logged
         return context
 
     @property

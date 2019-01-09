@@ -23,8 +23,9 @@ class Guide(models.Model):
     user1.pic.save('abc.png', File(open('/tmp/pic.png', 'rb'))) 
     """
     preview = models.ImageField(upload_to='pic_folder/')
-    author = models.CharField(max_length=100)
+    author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.CharField(max_length=5)
+    date_creation = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "{} by {}".format(self.guide_name, self.author)
