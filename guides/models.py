@@ -19,7 +19,7 @@ class Guide(models.Model):
     votes = models.IntegerField(default=0)
     preview = models.ImageField(upload_to='pic_folder/')
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
-    hidden = models.CharField(max_length=5)
+    hidden = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
