@@ -21,7 +21,6 @@ class Guide(models.Model):
     preview = models.ImageField(upload_to='pic_folder/')
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
-    date_creation = models.DateTimeField(auto_now_add=True)
     user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted')
 
     def __str__(self):
