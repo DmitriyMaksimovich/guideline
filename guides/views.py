@@ -57,6 +57,11 @@ class SectionBrowserView(IndexView):
         return Section.objects.order_by("-guides_in_section")
 
 
+class MyGuidesView(IndexView):
+    def get_queryset(self):
+        return Guide.objects.filter(author=self.request.user.pk).order_by('-date_creation')
+
+
 class GuideView(generic.DetailView):
     model = Guide
     template_name = 'guides/guide.html'

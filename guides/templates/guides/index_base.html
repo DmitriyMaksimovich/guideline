@@ -32,7 +32,7 @@
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
                     for="demo-menu-lower-left">
                     <li class="mdl-menu__item"><a href="{% url 'account_logout' %}">Logout</a></li>
-                    <li class="mdl-menu__item"><a href="">My guides</a></li>
+                    <li class="mdl-menu__item"><a href="{% url 'guides:my_guides' %}">My guides</a></li>
                 </ul>
                 <span class="mdl-navigation__link">Hi, {{ user.username }}</span>
                 {% else %}
