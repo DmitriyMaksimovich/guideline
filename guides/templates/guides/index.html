@@ -24,18 +24,19 @@
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
+                {% load socialaccount %}
                 {% if user.is_authenticated %}
                 <button id="demo-menu-lower-left" class="mdl-button mdl-js-button mdl-button--icon">
                     <i class="material-icons">more_vert</i>
                 </button>
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
                     for="demo-menu-lower-left">
-                    <li class="mdl-menu__item"><a href="{% url 'logout' %}">Logout</a></li>
-                    <li class="mdl-menu__item"><a href="{% url 'password_reset' %}">Reset password</a></li>
+                    <li class="mdl-menu__item"><a href="{% url 'account_logout' %}">Logout</a></li>
                 </ul>
                 <span class="mdl-navigation__link">Hi, {{ user.username }}</span>
                 {% else %}
-                <a class="mdl-navigation__link" href="{% url 'login' %}">Login</a>
+                <a class="mdl-navigation__link" href="{% url 'account_login' %}">Login</a>
+                <a class="mdl-navigation__link" href="{% provider_login_url 'google' %}">Log In with Gmail</a>
                 {% endif %}
                 <a class="mdl-navigation__link" href="{% url 'guides:about_us' %}">About site</a>
             </nav>
@@ -98,7 +99,10 @@
                             {{ guide.guide_name }}
                         </a>
                         <button class="mdl-button mdl-js-button">
-                            {{ guide.votes }}<i class="material-icons">add</i>
+                            {{ guide.votes }}
+                            {% if is_logged %}
+                            <i class="material-icons">add</i>
+                            {% endif %}
                         </button>
                         <span></span>
                     </div>
