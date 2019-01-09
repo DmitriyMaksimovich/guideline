@@ -17,11 +17,6 @@ class Guide(models.Model):
     guide_text = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
-    """
-    from django.core.files import File
-    user1=User(name='abc')
-    user1.pic.save('abc.png', File(open('/tmp/pic.png', 'rb'))) 
-    """
     preview = models.ImageField(upload_to='pic_folder/')
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.CharField(max_length=5)
