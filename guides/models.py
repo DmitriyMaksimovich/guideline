@@ -21,7 +21,7 @@ class Guide(models.Model):
     preview = models.ImageField(upload_to='pic_folder/')
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
-    user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted')
+    user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted', blank=True)
 
     def __str__(self):
         return "{} by {}".format(self.guide_name, self.author)
