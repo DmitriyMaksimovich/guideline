@@ -17,7 +17,6 @@ class Guide(models.Model):
     tags = models.CharField(max_length=255, blank=True)
     guide_text = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
-    votes = models.IntegerField(default=0)
     preview = models.ImageField(upload_to='pic_folder/')
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
