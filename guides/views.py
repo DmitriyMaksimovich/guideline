@@ -1,4 +1,5 @@
 from django.views import generic
+from django.db.models import Count
 import datetime
 from .models import Guide, Section
 
@@ -9,7 +10,7 @@ class IndexView(generic.ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        return Guide.objects.filter(hidden=False).order_by("-votes")
+        return Guide.objects.filter(hidden=False).annotate(Count('user_voted'))
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -29,12 +30,12 @@ class SortedIndexView(IndexView):
     def get_queryset(self):
         guides_filter = self.kwargs.get('filter', None)
         if not guides_filter or guides_filter == 'top_all_time':
-            guides = Guide.objects.filter(hidden=False).order_by("-votes")
+            guides = Guide.objects.filter(hidden=False).annotate(Count('user_voted'))
         elif guides_filter == "top_month":
             current_month = datetime.date.today().month
             current_year = datetime.date.today().year
             guides = Guide.objects.filter(pub_date__gte=datetime.date(current_year, current_month, 1), hidden=False)
-            guides = guides.order_by("-votes")
+            guides = guides.annotate(Count('user_voted'))
         elif guides_filter == 'new':
             guides = Guide.objects.filter(hidden=False).order_by("-pub_date")
         else:
@@ -45,7 +46,7 @@ class SortedIndexView(IndexView):
 class SectionView(IndexView):
     def get_queryset(self):
         section = self.kwargs.get('section', None)
-        return Guide.objects.filter(section=section, hidden=False).order_by("-votes")
+        return Guide.objects.filter(section=section, hidden=False).annotate(Count('user_voted'))
 
 
 class SectionBrowserView(IndexView):
