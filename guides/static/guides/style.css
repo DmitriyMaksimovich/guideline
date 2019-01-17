@@ -107,3 +107,7 @@ a.chip__text {
     color: black;
     text-decoration: none;
 }
+
+div.guide_creation {
+    min-height: 100vh;
+}

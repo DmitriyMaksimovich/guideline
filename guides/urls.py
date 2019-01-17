@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^sections_browser/$', views.SectionBrowserView.as_view(), name='sections_browser'),
     url(r'^my_guides/$', login_required(views.MyGuidesView.as_view()), name='my_guides'),
     url(r'^(?P<pk>[0-9]+)/$', views.GuideView.as_view(), name='guide'),
+    url(r'^create_guide/$', login_required(views.CreateGuideView.as_view()), name='create_guide'),
     url(r'^about_us/$', views.AboutUsView.as_view(), name='about_us'),
 ]

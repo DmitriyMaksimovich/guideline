@@ -5,7 +5,7 @@ from .models import Guide, Section
 
 
 class IndexView(generic.ListView):
-    template_name = 'guides/index.html'
+    template_name = 'guides/index_content.html'
     context_object_name = 'guides_list'
     paginate_by = 15
 
@@ -67,6 +67,10 @@ class GuideView(generic.DetailView):
     model = Guide
     template_name = 'guides/guide.html'
     context_object_name = 'guide'
+
+
+class CreateGuideView(generic.TemplateView):
+    template_name = 'guides/guide_creation.html'
 
 
 class AboutUsView(generic.TemplateView):
