@@ -5,7 +5,7 @@
     <div class="main-sector-1">
         {% for section in sections_list %}
         <a class="chip__text" href="{% url 'guides:section' section.pk %}">
-            {{ section.section_name }}, {{ section.guides_in_section }}
+            {{ section.section_name }}, {{ section.num_guides }}
         </a>
         {% endfor %}
     </div>

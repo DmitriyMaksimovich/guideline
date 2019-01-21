@@ -2,6 +2,7 @@ from django.views import generic
 from django.db.models import Count
 import datetime
 from .models import Guide, Section
+from .forms import GuideForm
 
 
 class IndexView(generic.ListView):
@@ -14,7 +15,7 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['sections'] = Section.objects.order_by('guides_in_section')[:10]
+        context['sections'] = Section.objects.annotate(num_guides=Count('guide'))[:10]
         context['user_is_logged'] = self.user_is_logged
         return context
 
@@ -55,10 +56,12 @@ class SectionBrowserView(IndexView):
     context_object_name = 'sections_list'
 
     def get_queryset(self):
-        return Section.objects.order_by("-guides_in_section")
+        return Section.objects.annotate(num_guides=Count('guide'))
 
 
 class MyGuidesView(IndexView):
+    template_name = 'guides/my_guides.html'
+
     def get_queryset(self):
         return Guide.objects.filter(author=self.request.user.pk).order_by('-pub_date')
 
@@ -69,8 +72,23 @@ class GuideView(generic.DetailView):
     context_object_name = 'guide'
 
 
-class CreateGuideView(generic.TemplateView):
+class CreateGuideView(generic.edit.FormView):
     template_name = 'guides/guide_creation.html'
+    form_class = GuideForm
+    success_url = '/my_guides/'
+
+    def get_form_kwargs(self):
+        kwargs = super(CreateGuideView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        return super(CreateGuideView, self).form_valid(form)
+
+
+def vote():
+    pass
 
 
 class AboutUsView(generic.TemplateView):

@@ -9,27 +9,17 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     {% load staticfiles %}
-    <script src="{% static 'guides/ckeditor/ckeditor.js' %}"></script>
     <link rel="stylesheet" href="{% static 'guides/style.css' %}">
 </head>
 {% endblock %}
 
 {% block main %}
 <div class="guide_creation">
-    <h1>Classic editor</h1>
-    <textarea name="content" id="editor">
-        &lt;p&gt;This is some sample content.&lt;/p&gt;
-    </textarea>
-    <script>
-        CKEDITOR.replace( 'editor' );
-    </script>
-    <!--<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ))
-        .catch( error => {
-            console.error( error );
-        } );
-
-    </script>-->
+   <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form.media }}
+       {{ form.as_p }}
+       <input type="submit" value="Submit" />
+    </form>
 </div>
 {% endblock %}

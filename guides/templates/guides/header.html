@@ -21,6 +21,7 @@
                     for="demo-menu-lower-left">
                     <li class="mdl-menu__item"><a href="{% url 'account_logout' %}">Logout</a></li>
                     <li class="mdl-menu__item"><a href="{% url 'guides:my_guides' %}">My guides</a></li>
+                    <li class="mdl-menu__item"><a href="{% url 'guides:create_guide' %}">Create new guide</a></li>
                 </ul>
                 <span class="mdl-navigation__link">Hi, {{ user.username }}</span>
                 {% else %}
