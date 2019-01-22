@@ -1,26 +1,16 @@
-<!doctype html>
+{% extends "guides/index_base.html" %}
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Guides</title>
-    <meta name="description" content="guides guide">
-    <meta name="author" content="SitePoint">
+{% block content %}
 
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'guides/style.css' %}">
-</head>
-
-<body>
-<p>Это гайд {{ guide.guide_name }} от автора {{ guide.author }}</p>
-<div class="content">
-    {{ guide.guide_text|safe }}
+<div class="page-content grid-container">
+    <div class="main-sector-1">
+        <div class="guide">
+            <div class="title">
+                <h3>{{ guide.guide_name }}</h3> by {{ guide.author }}
+            </div>
+            <hr>
+            <p>{{ guide.guide_text|safe }}</p>
+        </div>
+    </div>
 </div>
-<script>
-    document.getElementsByClassName("content").innerHTML="{{ guide.guide_text }}"
-</script>
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,6 +1,6 @@
+import datetime
 from django.views import generic
 from django.db.models import Count
-import datetime
 from .models import Guide, Section
 from .forms import GuideForm
 
@@ -16,15 +16,7 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['sections'] = Section.objects.annotate(num_guides=Count('guide'))[:10]
-        context['user_is_logged'] = self.user_is_logged
         return context
-
-    @property
-    def user_is_logged(self):
-        if self.request.user.is_authenticated:
-            return True
-        else:
-            return False
 
 
 class SortedIndexView(IndexView):
@@ -70,6 +62,11 @@ class GuideView(generic.DetailView):
     model = Guide
     template_name = 'guides/guide.html'
     context_object_name = 'guide'
+
+    def get_context_data(self, **kwargs):
+        context = super(GuideView, self).get_context_data(**kwargs)
+        context['sections'] = Section.objects.annotate(num_guides=Count('guide'))[:10]
+        return context
 
 
 class CreateGuideView(generic.edit.FormView):

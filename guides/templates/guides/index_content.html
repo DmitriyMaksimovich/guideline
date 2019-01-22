@@ -19,7 +19,7 @@
                    href="{% url 'guides:guide' guide.pk %}">
                     {{ guide.guide_name }}
                 </a>
-                {% if user not in guide.user_voted.all and user_is_logged %}
+                {% if user not in guide.user_voted.all and user.is_authenticated %}
                 <button class="mdl-button mdl-js-button">
                     {{ guide.user_voted.all|length }}
                     <i class="material-icons">add</i>

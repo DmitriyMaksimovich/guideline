@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'vtt7+a3)hxaqbc@sn!!=71un!ebs*-g7-%_$9i$ja!5an)zy!%'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -47,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'ckeditor',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'guideline.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -91,7 +89,6 @@ DATABASES = {
         'PASSWORD': '78912355',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -111,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -124,7 +120,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -152,3 +147,29 @@ SITE_ID = 1
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+
+# CKeditor settings
+
+CKEDITOR_CONFIGS = {
+    'guide_creation': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Undo', 'Redo'],
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat'],
+            ['TextColor', 'BGColor'],
+            ['Blockquote'],
+            ['NumberedList', 'BulletedList'],
+            ['Outdent', 'Indent'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['Link', 'Unlink'],
+            ['CodeSnippet'],
+            ['Maximize', 'ShowBlocks'],
+            '/',
+            ['Styles', 'Format', 'Font', 'FontSize'],
+        ],
+        'height': 500,
+        'width': '99vw',
+        'extraPlugins': 'codesnippet,tableresize,tabletools'
+    },
+}

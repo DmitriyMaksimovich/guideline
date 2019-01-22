@@ -13,6 +13,7 @@ body .mdl-layout__container {
     justify-content: flex-start;
     margin-top: 10px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 main.mdl-layout__content {
@@ -110,4 +111,18 @@ a.chip__text {
 
 div.guide_creation {
     min-height: 100vh;
+    width: 100vw;
+}
+
+div.main-sector-1 .guide {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+}
+
+div.main-sector-1 .guide h3 {
+    margin-top: 0px;
+    display: inline;
+    color: #424242;
 }

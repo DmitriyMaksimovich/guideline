@@ -15,7 +15,7 @@ class Guide(models.Model):
     guide_name = models.CharField(max_length=100)
     description = models.CharField(max_length=255, blank=True)
     tags = models.CharField(max_length=255, blank=True)
-    guide_text = RichTextField()
+    guide_text = RichTextField(config_name='guide_creation')
     pub_date = models.DateTimeField(auto_now_add=True)
     preview = models.ImageField(upload_to='pic_folder/')
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)

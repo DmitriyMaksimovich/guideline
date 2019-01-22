@@ -14,12 +14,20 @@
 {% endblock %}
 
 {% block main %}
+{% load widget_tweaks %}
 <div class="guide_creation">
    <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data">
        {% csrf_token %}
        {{ form.media }}
-       {{ form.as_p }}
-       <input type="submit" value="Submit" />
+       <p>{{ form.guide_name|add_class:"mdl-textfield__input" }}</p>
+       <p>{{ form.description|add_class:"mdl-textfield__input" }}</p>
+       <p>{{ form.section }}</p>
+       <p>{{ form.tags|add_class:"mdl-textfield__input" }}</p>
+       <p>{{ form.preview|add_class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" }}</p>
+       <p>{{ form.hidden|add_class:"mdl-checkbox__input" }}</p>
+       <p>{{ form.guide_text }}</p>
+       <!--{{ form.as_p }}-->
+       <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
     </form>
 </div>
 {% endblock %}
