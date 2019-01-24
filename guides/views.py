@@ -48,7 +48,7 @@ class SectionBrowserView(IndexView):
     context_object_name = 'sections_list'
 
     def get_queryset(self):
-        return Section.objects.annotate(num_guides=Count('guide'))
+        return Section.objects.annotate(num_guides=Count('guide')).order_by('-num_guides')
 
 
 class MyGuidesView(IndexView):

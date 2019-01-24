@@ -16,18 +16,34 @@
 {% block main %}
 {% load widget_tweaks %}
 <div class="guide_creation">
-   <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data">
-       {% csrf_token %}
-       {{ form.media }}
-       <p>{{ form.guide_name|add_class:"mdl-textfield__input" }}</p>
-       <p>{{ form.description|add_class:"mdl-textfield__input" }}</p>
-       <p>{{ form.section }}</p>
-       <p>{{ form.tags|add_class:"mdl-textfield__input" }}</p>
-       <p>{{ form.preview|add_class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" }}</p>
-       <p>{{ form.hidden|add_class:"mdl-checkbox__input" }}</p>
-       <p>{{ form.guide_text }}</p>
-       <!--{{ form.as_p }}-->
-       <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
+    <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        <div class="mdl-textfield mdl-js-textfield">
+            {{ form.guide_name|add_class:"mdl-textfield__input" }}
+            <label for="{{ form.guide_name.id_for_label }}" class="mdl-textfield__label">Guide name</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            {{ form.description|add_class:"mdl-textfield__input" }}
+            <label for="{{ form.description.id_for_label }}" class="mdl-textfield__label">Short description</label>
+        </div>
+        <br/>
+        <div class="mdl-textfield mdl-js-textfield">
+            {{ form.tags|add_class:"mdl-textfield__input" }}
+            <label for="{{ form.tags.id_for_label }}" class="mdl-textfield__label">Tags</label>
+        </div>
+
+        <div>
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="{{ form.hidden.id_for_label }}">
+            {{ form.hidden|add_class:"mdl-switch__input" }}
+            <span class="mdl-switch__label">Hidden</span>
+        </label>
+        </div>
+
+        <p>{{ form.section }}</p>
+        <p>{{ form.preview|add_class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" }}</p>
+        <p>{{ form.guide_text }}</p>
+        <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
     </form>
 </div>
 {% endblock %}

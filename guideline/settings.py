@@ -169,7 +169,7 @@ CKEDITOR_CONFIGS = {
             ['Styles', 'Format', 'Font', 'FontSize'],
         ],
         'height': 500,
-        'width': '99vw',
+        'width': '100%',
         'extraPlugins': 'codesnippet,tableresize,tabletools'
     },
 }

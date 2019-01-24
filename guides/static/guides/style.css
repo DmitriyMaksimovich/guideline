@@ -92,16 +92,8 @@ main.mdl-layout__content {
     box-shadow: 0 7px 12px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
 }
 
-a.chip__text {
-    color: black;
-    padding: 10px;
-    text-decoration: none;
-    background-color: #BDBDBD;
-    margin: 10px 10px;
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
-    border-bottom-left-radius: 18px;
-    border-bottom-right-radius: 18px;
+a.mdl-chip {
+    margin: 10px;
 }
 
 .mdl-navigation a {
@@ -111,7 +103,7 @@ a.chip__text {
 
 div.guide_creation {
     min-height: 100vh;
-    width: 100vw;
+    margin: 20px;
 }
 
 div.main-sector-1 .guide {
@@ -125,4 +117,20 @@ div.main-sector-1 .guide h3 {
     margin-top: 0px;
     display: inline;
     color: #424242;
+}
+
+.django-ckeditor-widget {
+    width: 100%;
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__input {
+    border-color: #bdbdbd;
+}
+
+input[type="text"], textarea {
+    background: transparent;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0px 9999px white;
 }
