@@ -1,5 +1,19 @@
 {% extends "guides/index_base.html" %}
 
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <title>Guides</title>
+    <meta name="description" content="guides guide">
+
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'guides/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'guides/style.css' %}">
+</head>
+{% endblock %}
+
 {% block content %}
 <div class="page-content grid-container">
     <div class="main-sector-1">
