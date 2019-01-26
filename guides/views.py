@@ -77,11 +77,19 @@ class CreateGuideView(generic.edit.FormView):
     def get_form_kwargs(self):
         kwargs = super(CreateGuideView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        kwargs['section'] = self.request.POST.get('section', 'other')
         return kwargs
 
     def form_valid(self, form):
         form.save()
         return super(CreateGuideView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateGuideView, self).get_context_data(**kwargs)
+        sections_query = Section.objects.all()
+        sections_list = [section.section_name for section in sections_query]
+        context["existing_sections"] = sections_list
+        return context
 
 
 def vote():

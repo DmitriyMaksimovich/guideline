@@ -17,34 +17,57 @@
 {% block main %}
 {% load widget_tweaks %}
 <div class="guide_creation">
-    <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}
         {{ form.media }}
+
         <div class="mdl-textfield mdl-js-textfield">
             {{ form.guide_name|add_class:"mdl-textfield__input" }}
             <label for="{{ form.guide_name.id_for_label }}" class="mdl-textfield__label">Guide name</label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield">
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield_description">
             {{ form.description|add_class:"mdl-textfield__input" }}
             <label for="{{ form.description.id_for_label }}" class="mdl-textfield__label">Short description</label>
         </div>
-        <br/>
-        <div class="mdl-textfield mdl-js-textfield">
+
+        <div class="mdl-textfield mdl-js-textfield form-tags">
             {{ form.tags|add_class:"mdl-textfield__input" }}
             <label for="{{ form.tags.id_for_label }}" class="mdl-textfield__label">Tags</label>
         </div>
 
-        <div>
-        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="{{ form.hidden.id_for_label }}">
-            {{ form.hidden|add_class:"mdl-switch__input" }}
-            <span class="mdl-switch__label">Hidden</span>
-        </label>
+        <div class="autocomplete mdl-textfield mdl-js-textfield form-section">
+            <input type="text" id="section" name="section" class="mdl-textfield__input">
+            <label for="section" class="mdl-textfield__label">Section</label>
         </div>
 
-        <p>{{ form.section }}</p>
-        <p>{{ form.preview|add_class:"mdl-button mdl-js-button mdl-button--raised mdl-button--colored" }}</p>
+        <br />
+
+        <div class="form-preview">
+            {{ form.preview|add_class:"inputfile" }}
+            <label for="{{ form.preview.id_for_label }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                Choose a preview image
+            </label>
+        </div>
+
+        <div class="form-hidden">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="{{ form.hidden.id_for_label }}">
+                {{ form.hidden|add_class:"mdl-switch__input" }}
+                <span class="mdl-switch__label">Hidden</span>
+            </label>
+        </div>
+
         <p>{{ form.guide_text }}</p>
+
         <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
     </form>
+
+    <!-- Autocomplete for section input -->
+    <script src="{% static 'guides/autocomplete.js' %}"></script>
+    <script>
+        var countries = {{ existing_sections|safe }};
+        autocomplete(document.getElementById("section"), countries);
+    </script>
+
 </div>
 {% endblock %}

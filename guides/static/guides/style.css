@@ -127,10 +127,74 @@ div.main-sector-1 .guide h3 {
     border-color: #bdbdbd;
 }
 
+div.mdl-textfield_description {
+    width: 70%;
+}
+
 input[type="text"], textarea {
     background: transparent;
 }
 
 input:-webkit-autofill {
   -webkit-box-shadow: inset 0 0 0px 9999px white;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.form-hidden {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 150px;
+    margin: 10px 0px;
+    display: inline-block;
+}
+
+.form-preview {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 50px;
+    width: 250px;
+    display: inline-block;
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    padding-top: 0px;
+    position: absolute;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 3px;
+    z-index: 99;
+    top: inherit;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px 10px 10px 10px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.autocomplete-items div:last-child {
+    border-radius: 0px 0px 3px 3px;
+ }
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    background-color: #3f51b5 !important;
+    color: #ffffff;
 }

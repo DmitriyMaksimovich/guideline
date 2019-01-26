@@ -24,3 +24,10 @@ class Guide(models.Model):
 
     def __str__(self):
         return "{} by {}".format(self.guide_name, self.author)
+
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tag
