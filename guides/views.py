@@ -1,6 +1,8 @@
 import datetime
 from django.views import generic
 from django.db.models import Count
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from .models import Guide, Section
 from .forms import GuideForm
 
@@ -92,8 +94,12 @@ class CreateGuideView(generic.edit.FormView):
         return context
 
 
-def vote():
-    pass
+def vote(request, guide_pk):
+    referer = request.META.get('HTTP_REFERER')
+    user = request.user
+    guide = get_object_or_404(Guide, pk=guide_pk)
+    guide.user_voted.add(user)
+    return HttpResponseRedirect(referer)
 
 
 class AboutUsView(generic.TemplateView):

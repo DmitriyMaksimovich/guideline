@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/$', views.GuideView.as_view(), name='guide'),
     url(r'^create_guide/$', login_required(views.CreateGuideView.as_view()), name='create_guide'),
     url(r'^about_us/$', views.AboutUsView.as_view(), name='about_us'),
-    url(r'^vote/$', views.vote, name='vote'),
+    url(r'^vote/(?P<guide_pk>[0-9]+)/$', login_required(views.vote), name='vote'),
 ]

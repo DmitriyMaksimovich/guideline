@@ -34,10 +34,12 @@
                     {{ guide.guide_name }}
                 </a>
                 {% if user not in guide.user_voted.all and user.is_authenticated %}
-                <button class="mdl-button mdl-js-button">
-                    {{ guide.user_voted.all|length }}
-                    <i class="material-icons">add</i>
-                </button>
+                <a href="{% url 'guides:vote' guide.pk %}">
+                    <button class="mdl-button mdl-js-button">
+                        {{ guide.user_voted.all|length }}
+                        <i class="material-icons">add</i>
+                    </button>
+                </a>
                 {% else %}
                 <button class="mdl-button mdl-js-button">
                     {{ guide.user_voted.all|length }}
