@@ -18,11 +18,17 @@
 <div class="page-content grid-container">
     <div class="main-sector-1">
         <div class="guide">
+            {% if guide %}
             <div class="title">
                 <h3>{{ guide.guide_name }}</h3> by {{ guide.author }}
             </div>
             <hr>
             <p>{{ guide.guide_text|safe }}</p>
+            {% else %}
+            <div class="title">
+                <h3>This guide is not available</h3>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

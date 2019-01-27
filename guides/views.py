@@ -70,6 +70,13 @@ class GuideView(generic.DetailView):
         context['sections'] = Section.objects.annotate(num_guides=Count('guide'))[:10]
         return context
 
+    def get_object(self, queryset=None):
+        target_object = super(GuideView, self).get_object()
+        if target_object.hidden:
+            return None
+        else:
+            return target_object
+
 
 class CreateGuideView(generic.edit.FormView):
     template_name = 'guides/guide_creation.html'
