@@ -11,7 +11,7 @@
             <span class="mdl-layout-title">Разделы</span>
             <nav class="mdl-navigation">
                 {% for section in sections %}
-                <a class="mdl-navigation__link" href="{% url 'guides:section' section.pk %}">
+                <a class="mdl-navigation__link" href="{% url 'guides:section' section.section_name %}">
                     {{ section.section_name }}
                 </a>
                 {% endfor %}

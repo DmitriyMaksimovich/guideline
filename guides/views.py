@@ -40,7 +40,8 @@ class SortedIndexView(IndexView):
 
 class SectionView(IndexView):
     def get_queryset(self):
-        section = self.kwargs.get('section', None)
+        section_name = self.kwargs.get('section', None)
+        section = Section.objects.get(section_name=section_name)
         return Guide.objects.filter(section=section, hidden=False).annotate(Count('user_voted'))
 
 
