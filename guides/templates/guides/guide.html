@@ -22,6 +22,19 @@
             <div class="title">
                 <h3>{{ guide.guide_name }}</h3> by {{ guide.author }}
             </div>
+            {% if user == guide.author %}
+            <div class="edit-delete-menu inside-guide">
+                <form action="{% url 'guides:delete_guide' %}" method="post" class="form-delete">
+                    {% csrf_token %}
+                    <input type="hidden" name="guide_pk" value="{{ guide.pk }}">
+                    <input type="submit" class="hidden-button" id="delete_guide_{{ guide.pk }}">
+                    <label for="delete_guide_{{ guide.pk }}">
+                        <i class="material-icons delete-guide">delete</i>
+                    </label>
+                </form>
+                <i class="material-icons edit-guide">edit</i>
+            </div>
+            {% endif %}
             <hr>
             <p>{{ guide.guide_text|safe }}</p>
             {% else %}
