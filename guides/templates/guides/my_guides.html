@@ -34,7 +34,7 @@
                         <i class="material-icons delete-guide">delete</i>
                     </label>
                 </form>
-                <i class="material-icons edit-guide">edit</i>
+                <a href="{% url 'guides:edit_guide' guide.pk %}"><i class="material-icons edit-guide">edit</i></a>
             </div>
             <div class="mdl-card__supporting-text">
                 {{ guide.description }}

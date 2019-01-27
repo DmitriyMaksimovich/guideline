@@ -17,7 +17,11 @@
 {% block main %}
 {% load widget_tweaks %}
 <div class="guide_creation">
+    {% if action == 'create' %}
     <form action="{% url 'guides:create_guide' %}" method="post" enctype="multipart/form-data" autocomplete="off">
+    {% else %}
+    <form action="{% url 'guides:edit_guide' guide.pk %}" method="post" enctype="multipart/form-data" autocomplete="off">
+    {% endif %}
         {% csrf_token %}
         {{ form.media }}
 
@@ -37,7 +41,7 @@
         </div>
 
         <div class="autocomplete mdl-textfield mdl-js-textfield form-section">
-            <input type="text" id="section" name="section" class="mdl-textfield__input">
+            <input type="text" id="section" name="section" class="mdl-textfield__input" value="{{ guide.section }}">
             <label for="section" class="mdl-textfield__label">Section</label>
         </div>
 

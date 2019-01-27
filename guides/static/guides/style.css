@@ -90,7 +90,10 @@ main.mdl-layout__content {
     margin-bottom: 6px;
 }
 
-.edit-delete-menu a:visited {
+.edit-delete-menu a:link,
+.edit-delete-menu a:visited,
+.edit-delete-menu a:hover,
+.edit-delete-menu a:active {
     color: black;
 }
 

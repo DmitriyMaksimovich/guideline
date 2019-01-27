@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^about_us/$', views.AboutUsView.as_view(), name='about_us'),
     url(r'^vote/$', login_required(views.vote), name='vote'),
     url(r'delete/$', login_required(views.delete_guide), name='delete_guide'),
+    url(r'^edit/(?P<pk>[0-9]+)/$', login_required(views.EditGuideView.as_view()), name='edit_guide'),
 ]

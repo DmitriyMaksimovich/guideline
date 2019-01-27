@@ -3,6 +3,7 @@ from django.views import generic
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from .models import Guide, Section
 from .forms import GuideForm
 
@@ -99,6 +100,35 @@ class CreateGuideView(generic.edit.FormView):
         sections_query = Section.objects.all()
         sections_list = [section.section_name for section in sections_query]
         context["existing_sections"] = sections_list
+        context["action"] = 'create_guide'
+        return context
+
+
+class EditGuideView(generic.edit.UpdateView):
+    model = Guide
+    fields = ['guide_name', 'description', 'preview', 'hidden', 'tags', 'guide_text']
+    template_name = 'guides/guide_creation.html'
+    success_url = '/my_guides/'
+
+    def get_initial(self):
+        initial = super(EditGuideView, self).get_initial()
+        guide = self.get_object()
+        initial['section'] = guide.section
+        initial['preview'] = None
+        return initial
+
+    def dispatch(self, request, *args, **kwargs):
+        guide = self.get_object()
+        if guide.author != self.request.user:
+            return HttpResponseRedirect(reverse('guides:guide', args=[guide.pk]))
+        return super(EditGuideView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditGuideView, self).get_context_data(**kwargs)
+        sections_query = Section.objects.all()
+        sections_list = [section.section_name for section in sections_query]
+        context["existing_sections"] = sections_list
+        context["action"] = 'edit_guide'
         return context
 
 
@@ -123,3 +153,8 @@ def delete_guide(request):
 
 class AboutUsView(generic.TemplateView):
     template_name = 'guides/about_us.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsView, self).get_context_data(**kwargs)
+        context['sections'] = Section.objects.annotate(num_guides=Count('guide'))[:10]
+        return context
