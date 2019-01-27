@@ -198,3 +198,7 @@ input:-webkit-autofill {
     background-color: #3f51b5 !important;
     color: #ffffff;
 }
+
+table {
+    border-collapse: collapse;
+}
