@@ -90,6 +90,10 @@ main.mdl-layout__content {
     margin-bottom: 6px;
 }
 
+.edit-delete-menu a:visited {
+    color: black;
+}
+
 .delete-guide {
     margin-left: 9px;
     cursor: pointer
