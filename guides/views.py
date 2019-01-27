@@ -72,7 +72,7 @@ class GuideView(generic.DetailView):
 
     def get_object(self, queryset=None):
         target_object = super(GuideView, self).get_object()
-        if target_object.hidden:
+        if target_object.hidden and self.request.user != target_object.author:
             return None
         else:
             return target_object
