@@ -18,7 +18,7 @@
 <div class="page-content grid-container">
     <div class="main-sector-1">
         {% for section in sections_list %}
-        <a class="mdl-chip mdl-chip--contact" href="{% url 'guides:section' section.pk %}">
+        <a class="mdl-chip mdl-chip--contact" href="{% url 'guides:section' section.section_name %}">
             <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">{{ section.num_guides }}</span>
             <span class="mdl-chip__text">{{ section.section_name }}</span>
         </a>
