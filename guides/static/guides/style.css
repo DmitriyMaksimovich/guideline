@@ -69,6 +69,37 @@ main.mdl-layout__content {
     float: right;
 }
 
+.edit-delete-menu {
+    background: white;
+    height: 36px;
+    width: 86px;
+    border-radius: 18px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    box-shadow: 1px 2px 1px rgba(0,0,0,0.12);
+}
+
+.edit-delete-menu i {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.delete-guide {
+    margin-left: 9px;
+    cursor: pointer
+}
+
+.edit-guide {
+    border-left: 1px solid #ccc;
+    padding-left: 9px;
+    margin-left: 4px;
+}
+
+.form-delete {
+    display: inline;
+}
+
 .pagination a {
     color: black;
     float: left;
@@ -139,7 +170,7 @@ input:-webkit-autofill {
   -webkit-box-shadow: inset 0 0 0px 9999px white;
 }
 
-.inputfile {
+.hidden-button {
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;

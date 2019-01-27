@@ -25,6 +25,17 @@
                 <h2 class="mdl-card__title-text">
                 </h2>
             </div>
+            <div class="edit-delete-menu">
+                <form action="{% url 'guides:delete_guide' %}" method="post" class="form-delete">
+                    {% csrf_token %}
+                    <input type="hidden" name="guide_pk" value="{{ guide.pk }}" >
+                    <input type="submit" class="hidden-button" id="delete_guide_id">
+                    <label for="delete_guide_id">
+                        <i class="material-icons line delete-guide">delete</i>
+                    </label>
+                </form>
+                <i class="material-icons edit-guide">edit</i>
+            </div>
             <div class="mdl-card__supporting-text">
                 {{ guide.description }}
             </div>

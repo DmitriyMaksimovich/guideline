@@ -110,5 +110,15 @@ def vote(request, guide_pk):
     return HttpResponseRedirect(referer)
 
 
+def delete_guide(request):
+    referer = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        guide_pk = request.POST['guide_pk']
+        target_guide = Guide.objects.get(pk=guide_pk)
+        if target_guide.author == request.user:
+            target_guide.delete()
+    return HttpResponseRedirect(referer)
+
+
 class AboutUsView(generic.TemplateView):
     template_name = 'guides/about_us.html'
