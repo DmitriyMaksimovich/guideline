@@ -90,13 +90,17 @@ main.mdl-layout__content {
     cursor: pointer
 }
 
+.vote-guide {
+    cursor: pointer
+}
+
 .edit-guide {
     border-left: 1px solid #ccc;
     padding-left: 9px;
     margin-left: 4px;
 }
 
-.form-delete {
+.form-delete, .form-vote {
     display: inline;
 }
 

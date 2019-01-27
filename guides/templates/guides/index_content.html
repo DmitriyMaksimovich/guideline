@@ -34,12 +34,17 @@
                     {{ guide.guide_name }}
                 </a>
                 {% if user not in guide.user_voted.all and user.is_authenticated %}
-                <a href="{% url 'guides:vote' guide.pk %}">
-                    <button class="mdl-button mdl-js-button">
-                        {{ guide.user_voted.all|length }}
-                        <i class="material-icons">add</i>
-                    </button>
-                </a>
+                <button class="mdl-button mdl-js-button">
+                    {{ guide.user_voted.all|length }}
+                    <form action="{% url 'guides:vote' %}" method="post" class="form-vote">
+                        {% csrf_token %}
+                        <input type="hidden" name="guide_pk" value="{{ guide.pk }}">
+                        <input type="submit" class="hidden-button" id="vote_for_guide_{{ guide.pk }}">
+                        <label for="vote_for_guide_{{ guide.pk }}">
+                            <i class="material-icons vote-guide">add</i>
+                        </label>
+                    </form>
+                </button>
                 {% else %}
                 <button class="mdl-button mdl-js-button">
                     {{ guide.user_voted.all|length }}

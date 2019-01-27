@@ -28,10 +28,10 @@
             <div class="edit-delete-menu">
                 <form action="{% url 'guides:delete_guide' %}" method="post" class="form-delete">
                     {% csrf_token %}
-                    <input type="hidden" name="guide_pk" value="{{ guide.pk }}" >
-                    <input type="submit" class="hidden-button" id="delete_guide_id">
-                    <label for="delete_guide_id">
-                        <i class="material-icons line delete-guide">delete</i>
+                    <input type="hidden" name="guide_pk" value="{{ guide.pk }}">
+                    <input type="submit" class="hidden-button" id="delete_guide_{{ guide.pk }}">
+                    <label for="delete_guide_{{ guide.pk }}">
+                        <i class="material-icons delete-guide">delete</i>
                     </label>
                 </form>
                 <i class="material-icons edit-guide">edit</i>
@@ -44,10 +44,17 @@
                    href="{% url 'guides:guide' guide.pk %}">
                     {{ guide.guide_name }}
                 </a>
-                {% if user not in guide.user_voted.all and user_is_logged %}
+                {% if user not in guide.user_voted.all and user.is_authenticated %}
                 <button class="mdl-button mdl-js-button">
                     {{ guide.user_voted.all|length }}
-                    <i class="material-icons">add</i>
+                    <form action="{% url 'guides:vote' %}" method="post" class="form-vote">
+                        {% csrf_token %}
+                        <input type="hidden" name="guide_pk" value="{{ guide.pk }}">
+                        <input type="submit" class="hidden-button" id="vote_for_guide_{{ guide.pk }}">
+                        <label for="vote_for_guide_{{ guide.pk }}">
+                            <i class="material-icons vote-guide">add</i>
+                        </label>
+                    </form>
                 </button>
                 {% else %}
                 <button class="mdl-button mdl-js-button">

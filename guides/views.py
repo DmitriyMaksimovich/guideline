@@ -102,11 +102,12 @@ class CreateGuideView(generic.edit.FormView):
         return context
 
 
-def vote(request, guide_pk):
+def vote(request):
     referer = request.META.get('HTTP_REFERER')
-    user = request.user
-    guide = get_object_or_404(Guide, pk=guide_pk)
-    guide.user_voted.add(user)
+    if request.method == 'POST':
+        guide_pk = request.POST['guide_pk']
+        target_guide = get_object_or_404(Guide, pk=guide_pk)
+        target_guide.user_voted.add(request.user)
     return HttpResponseRedirect(referer)
 
 
@@ -114,7 +115,7 @@ def delete_guide(request):
     referer = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         guide_pk = request.POST['guide_pk']
-        target_guide = Guide.objects.get(pk=guide_pk)
+        target_guide = get_object_or_404(Guide, pk=guide_pk)
         if target_guide.author == request.user:
             target_guide.delete()
     return HttpResponseRedirect(referer)
