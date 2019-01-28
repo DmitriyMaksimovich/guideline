@@ -88,7 +88,13 @@ class CreateGuideView(generic.edit.FormView):
     def get_form_kwargs(self):
         kwargs = super(CreateGuideView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
-        kwargs['section'] = self.request.POST.get('section', 'other')
+        section = self.request.POST.get('section', 'Other').capitalize()
+        # form have default value, it can be '', .get('section', default) did'n work in this case
+        if not section:
+            section = 'Other'
+        kwargs['section'] = section
+        tags = self.request.POST.get('tags', '').split(',')
+        kwargs['tags'] = [tag.capitalize().strip() for tag in tags]
         return kwargs
 
     def form_valid(self, form):
@@ -100,20 +106,18 @@ class CreateGuideView(generic.edit.FormView):
         sections_query = Section.objects.all()
         sections_list = [section.section_name for section in sections_query]
         context["existing_sections"] = sections_list
-        context["action"] = 'create_guide'
+        context["action"] = 'create'
         return context
 
 
 class EditGuideView(generic.edit.UpdateView):
     model = Guide
-    fields = ['guide_name', 'description', 'preview', 'hidden', 'tags', 'guide_text']
+    fields = ['guide_name', 'description', 'preview', 'hidden', 'guide_text']
     template_name = 'guides/guide_creation.html'
     success_url = '/my_guides/'
 
     def get_initial(self):
         initial = super(EditGuideView, self).get_initial()
-        guide = self.get_object()
-        initial['section'] = guide.section
         initial['preview'] = None
         return initial
 
@@ -128,7 +132,7 @@ class EditGuideView(generic.edit.UpdateView):
         sections_query = Section.objects.all()
         sections_list = [section.section_name for section in sections_query]
         context["existing_sections"] = sections_list
-        context["action"] = 'edit_guide'
+        context["action"] = 'edit'
         return context
 
 

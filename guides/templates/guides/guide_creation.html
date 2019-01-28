@@ -36,8 +36,8 @@
         </div>
 
         <div class="mdl-textfield mdl-js-textfield form-tags">
-            {{ form.tags|add_class:"mdl-textfield__input" }}
-            <label for="{{ form.tags.id_for_label }}" class="mdl-textfield__label">Tags (Example: tag_1, tag 2, ...)</label>
+            <input type="text" id="tags" name="tags" class="mdl-textfield__input" value="{{ guide.convert_tags_to_string }}">
+            <label for="tags" class="mdl-textfield__label">Tags (Example: tag_1, tag two, ...)</label>
         </div>
 
         <div class="autocomplete mdl-textfield mdl-js-textfield form-section">
@@ -72,6 +72,6 @@
         var countries = {{ existing_sections|safe }};
         autocomplete(document.getElementById("section"), countries);
     </script>
-
+    </form>
 </div>
 {% endblock %}

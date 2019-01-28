@@ -10,11 +10,18 @@ class Section(models.Model):
         return self.section_name
 
 
+class Tag(models.Model):
+    tag = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tag
+
+
 class Guide(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     guide_name = models.CharField(max_length=100)
     description = models.CharField(max_length=255, blank=True)
-    tags = models.CharField(max_length=255, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='guide_tags', blank=True)
     guide_text = RichTextField(config_name='guide_creation')
     pub_date = models.DateTimeField(auto_now_add=True)
     preview = models.ImageField(upload_to='pic_folder/')
@@ -23,11 +30,12 @@ class Guide(models.Model):
     user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted', blank=True)
 
     def __str__(self):
-        return "{} by {}".format(self.guide_name, self.author)
+        return "{}. {} by {}".format(self.pk, self.guide_name, self.author)
+
+    def convert_tags_to_string(self):
+        tags_query = self.tags.all()
+        tags_list = [tag_obj.tag for tag_obj in tags_query]
+        tags_string = ', '.join(tags_list)
+        return tags_string
 
 
-class Tag(models.Model):
-    tag = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.tag
