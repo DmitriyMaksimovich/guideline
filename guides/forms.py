@@ -25,16 +25,22 @@ class GuideForm(ModelForm):
 
 
 def get_guide_section(section_name):
+    # form have default value, it can be '', .get('section', default) did'n work in this case
+    if not section_name:
+        section_name = 'Other'
     try:
         section_object = Section.objects.get(section_name__iexact=section_name)
     except ObjectDoesNotExist:
+        section_name = section_name.strip().capitalize()
         section_object = Section(section_name=section_name)
         section_object.save()
     return section_object
 
 
-def get_tags_objects(tags_list):
+def get_tags_objects(tags_string):
     tags = set()
+    tags_list = tags_string.split(',')
+    tags_list = [tag.strip().capitalize() for tag in tags_list]
     for tag_name in tags_list:
         try:
             tag_object = Tag.objects.get(tag__iexact=tag_name)

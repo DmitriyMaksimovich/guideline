@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from .models import Guide, Section
-from .forms import GuideForm
+from .forms import GuideForm, get_guide_section, get_tags_objects
 
 
 class IndexView(generic.ListView):
@@ -88,13 +88,8 @@ class CreateGuideView(generic.edit.FormView):
     def get_form_kwargs(self):
         kwargs = super(CreateGuideView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
-        section = self.request.POST.get('section', 'Other').capitalize()
-        # form have default value, it can be '', .get('section', default) did'n work in this case
-        if not section:
-            section = 'Other'
-        kwargs['section'] = section
-        tags = self.request.POST.get('tags', '').split(',')
-        kwargs['tags'] = [tag.capitalize().strip() for tag in tags]
+        kwargs['section'] = self.request.POST.get('section', 'Other')
+        kwargs['tags'] = self.request.POST.get('tags', '')
         return kwargs
 
     def form_valid(self, form):
@@ -127,6 +122,24 @@ class EditGuideView(generic.edit.UpdateView):
             return HttpResponseRedirect(reverse('guides:guide', args=[guide.pk]))
         return super(EditGuideView, self).dispatch(request, *args, **kwargs)
 
+    def save_tags(self, guide):
+        guide.tags.clear()
+        tags_objects_set = get_tags_objects(self.request.POST['tags'])
+        [guide.tags.add(tag) for tag in tags_objects_set]
+
+    def save_section(self, guide):
+        section_name = self.request.POST['section']
+        section_object = get_guide_section(section_name)
+        guide.section = section_object
+        guide.save()
+
+    def form_valid(self, form):
+        what_ever = super(EditGuideView, self).form_valid(form)
+        guide = self.get_object()
+        self.save_tags(guide)
+        self.save_section(guide)
+        return what_ever
+
     def get_context_data(self, **kwargs):
         context = super(EditGuideView, self).get_context_data(**kwargs)
         sections_query = Section.objects.all()
@@ -146,13 +159,12 @@ def vote(request):
 
 
 def delete_guide(request):
-    referer = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         guide_pk = request.POST['guide_pk']
         target_guide = get_object_or_404(Guide, pk=guide_pk)
         if target_guide.author == request.user:
             target_guide.delete()
-    return HttpResponseRedirect(referer)
+    return HttpResponseRedirect(reverse('guides:my_guides'))
 
 
 class AboutUsView(generic.TemplateView):
