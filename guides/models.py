@@ -3,6 +3,10 @@ from accounts.models import CustomUser
 from ckeditor.fields import RichTextField
 
 
+def section_path(instance, filename):
+    return '{}/{}'.format(instance.section, filename)
+
+
 class Section(models.Model):
     section_name = models.CharField(max_length=50)
 
@@ -24,7 +28,7 @@ class Guide(models.Model):
     tags = models.ManyToManyField(Tag, related_name='guide_tags', blank=True)
     guide_text = RichTextField(config_name='guide_creation')
     pub_date = models.DateTimeField(auto_now_add=True)
-    preview = models.ImageField(upload_to='pic_folder/')
+    preview = models.ImageField(upload_to=section_path)
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
     user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted', blank=True)
@@ -37,5 +41,3 @@ class Guide(models.Model):
         tags_list = [tag_obj.tag for tag_obj in tags_query]
         tags_string = ', '.join(tags_list)
         return tags_string
-
-
