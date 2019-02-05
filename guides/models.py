@@ -3,10 +3,6 @@ from accounts.models import CustomUser
 from ckeditor.fields import RichTextField
 
 
-def section_path(instance, filename):
-    return '{}/{}'.format(instance.section, filename)
-
-
 class Section(models.Model):
     section_name = models.CharField(max_length=50)
 

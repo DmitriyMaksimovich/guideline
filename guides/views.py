@@ -1,11 +1,9 @@
 import datetime
-import os
 from django.views import generic
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.conf import settings
 from .models import Guide, Section
 from .forms import GuideForm, get_guide_section, get_tags_objects
 
@@ -160,7 +158,6 @@ def delete_guide(request):
         guide_pk = request.POST['guide_pk']
         target_guide = get_object_or_404(Guide, pk=guide_pk)
         if target_guide.author == request.user:
-            os.remove('{}/{}'.format(settings.MEDIA_ROOT, target_guide.preview))
             target_guide.delete()
     return HttpResponseRedirect(reverse('guides:my_guides'))
 
