@@ -113,11 +113,6 @@ class EditGuideView(generic.edit.UpdateView):
     template_name = 'guides/guide_creation.html'
     success_url = '/my_guides/'
 
-    def get_initial(self):
-        initial = super(EditGuideView, self).get_initial()
-        initial['preview'] = None
-        return initial
-
     def dispatch(self, request, *args, **kwargs):
         guide = self.get_object()
         if guide.author != self.request.user:

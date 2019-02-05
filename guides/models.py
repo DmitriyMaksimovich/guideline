@@ -28,7 +28,7 @@ class Guide(models.Model):
     tags = models.ManyToManyField(Tag, related_name='guide_tags', blank=True)
     guide_text = RichTextField(config_name='guide_creation')
     pub_date = models.DateTimeField(auto_now_add=True)
-    preview = models.ImageField(upload_to=section_path)
+    preview = models.CharField(max_length=255)
     author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
     user_voted = models.ManyToManyField(CustomUser, related_name='guide_voted', blank=True)

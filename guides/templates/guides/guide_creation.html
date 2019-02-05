@@ -45,14 +45,12 @@
             <label for="section" class="mdl-textfield__label">Section</label>
         </div>
 
-        <br />
-
-        <div class="form-preview">
-            {{ form.preview|add_class:"hidden-button" }}
-            <label for="{{ form.preview.id_for_label }}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                Choose a preview image
-            </label>
+        <div class="mdl-textfield mdl-js-textfield">
+            {{ form.preview|add_class:"mdl-textfield__input" }}
+            <label for="{{ form.preview.id_for_label }}" class="mdl-textfield__label">Preview image url (W:H 1:1,5)</label>
         </div>
+
+        <br />
 
         <div class="form-hidden">
             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="{{ form.hidden.id_for_label }}">
