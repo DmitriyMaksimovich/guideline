@@ -1,0 +1,22 @@
+.auth {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+
+.auth-card {
+	margin: 50px 0px 50px 0px;
+	padding: 50px;
+	box-shadow: 3px 3px 3px rgba(0,0,0,0.12);
+	vertical-align: middle;
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+input['text'] {
+    background-color: white;
+}
+
+
