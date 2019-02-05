@@ -9,7 +9,7 @@ body .mdl-layout__container {
 
 .main-sector-1 {
     display: flex;
-	flex-flow: row wrap;
+    flex-flow: row wrap;
     justify-content: space-around;
     align-content: space-around;
     margin-top: 10px;
@@ -24,7 +24,7 @@ body .mdl-layout__container {
 
 .main-sector-2 {
     display: flex;
-	flex-flow: row wrap;
+    flex-flow: row wrap;
     justify-content: flex-start;
     align-content: space-around;
     margin-top: 10px;
