@@ -8,25 +8,25 @@
     <!-- Left side menu. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Разделы</span>
+            <span class="mdl-layout-title">Sections</span>
             <nav class="mdl-navigation">
                 {% for section in sections %}
                 <a class="mdl-navigation__link" href="{% url 'guides:section' section.section_name %}">
                     {{ section.section_name }}
                 </a>
                 {% endfor %}
-                <a class="mdl-navigation__link" href="{% url 'guides:sections_browser' %}">Другие разделы</a>
+                <a class="mdl-navigation__link" href="{% url 'guides:sections_browser' %}">All sections</a>
             </nav>
-            <span class="mdl-layout-title">По популярности</span>
+            <span class="mdl-layout-title">By polularity</span>
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="{% url 'guides:index_sorted' 'top_month' %}">
-                    Лучшее за месяц
+                    Top guides of the month
                 </a>
                 <a class="mdl-navigation__link" href="{% url 'guides:index_sorted' 'top_all_time' %}">
-                    Лучшее за все время
+                    Top of all time
                 </a>
                 <a class="mdl-navigation__link" href="{% url 'guides:index_sorted' 'new' %}">
-                    Новое
+                    New
                 </a>
             </nav>
         </div>
