@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='guide',
             name='preview',
-            field=models.ImageField(upload_to=guides.models.section_path),
+            field=models.CharField(max_length=255),
         ),
     ]
