@@ -46,7 +46,8 @@
                     {{ guide.user_voted.all|length }}
                 </div>
                 {% else %}
-                <div class="votes-no-user">
+                <i class="material-icons vote-guide-icon">favorite_border</i>
+                <div class="votes">
                     {{ guide.user_voted.all|length }}
                 </div>
                 {% endif %}

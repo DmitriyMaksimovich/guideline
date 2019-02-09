@@ -141,10 +141,6 @@ main.mdl-layout__content {
     vertical-align: 20%;
 }
 
-.card-buttons .votes-no-user {
-    padding-top: 2px;
-}
-
 .delete-button, .edit-button {
     display: inline-block;
     cursor: pointer;
