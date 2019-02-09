@@ -15,34 +15,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-content grid-container">
-    <div class="main-sector-1">
-        <div class="guide">
-            {% if guide %}
-            <div class="title">
-                <h3>{{ guide.guide_name }}</h3> by {{ guide.author }}
-            </div>
-            {% if user == guide.author %}
-            <div class="edit-delete-menu">
-                <hr>
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                   href="{% url 'guides:edit_guide' guide.pk %}">
-                    Edit guide
-                </a>
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                   href="{% url 'guides:delete_guide' %}">
-                    Delete guide
-                </a>
-            </div>
-            {% endif %}
-            <hr>
-            <p>{{ guide.guide_text|safe }}</p>
-            {% else %}
-            <div class="title">
-                <h3>This guide is not available</h3>
-            </div>
-            {% endif %}
+<div class="page-content">
+    <div class="guide">
+        {% if guide %}
+        <div class="title">
+            <h3>{{ guide.guide_name }}</h3> by {{ guide.author }}
         </div>
+        {% if user == guide.author %}
+        <div class="edit-delete-menu">
+            <hr>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+               href="{% url 'guides:edit_guide' guide.pk %}">
+                Edit guide
+            </a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+               href="{% url 'guides:delete_guide' %}">
+                Delete guide
+            </a>
+        </div>
+        {% endif %}
+        <hr>
+        <p>{{ guide.guide_text|safe }}</p>
+        {% else %}
+        <div class="title">
+            <h3>This guide is not available</h3>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

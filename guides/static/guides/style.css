@@ -8,20 +8,13 @@ body .mdl-layout__container {
 }
 
 .main-sector-1 {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
     border-right: 0px;
     font-family: Roboto;
-}
-
-.main-sector-1::after {
-  content: "";
-  flex: auto;
 }
 
 .main-sector-2 {
@@ -109,6 +102,7 @@ main.mdl-layout__content {
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
+    border-radius: 4px 4px 0px 0px;
 }
 
 .card-description {
@@ -194,14 +188,11 @@ div.guide_creation {
     margin: 20px;
 }
 
-div.main-sector-1 .guide {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 100%;
+.page-content .guide {
+    margin: 20px;
 }
 
-div.main-sector-1 .guide h3 {
+.page-content .guide h3 {
     margin-top: 0px;
     display: inline;
     color: #424242;
