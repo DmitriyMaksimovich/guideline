@@ -45,11 +45,13 @@ main .mdl-layout__container {
 
 .page-content {
     grid-area: main;
+    background-color: #eeeeee;
 }
 
 .pagination {
     margin: 20px auto;
     grid-area: pagination;
+    background-color: #eeeeee;
 }
 
 main.mdl-layout__content {
@@ -59,6 +61,7 @@ main.mdl-layout__content {
     grid-template-areas:
         "menu main"
         "menu pagination";
+    background-color: #eeeeee;
 }
 
 @media (min-width: 1px) and (max-width: 1000px) {
@@ -77,61 +80,85 @@ main.mdl-layout__content {
     }
 }
 
-.demo-card-square.mdl-card {
-  width: 320px;
-  height: 320px;
-  margin: 10px;
+.card-square {
+    width: 320px;
+    height: 350px;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.25),
+                0 0 1px rgba(0,0,0,0.2);
+    background-color: #ffffff;
 }
 
-.mdl-card__actions button {
+.card-square a {
+    font-size: 1rem;
+    color: #616161;
+    text-decoration: none;
+}
+
+.card-preview {
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.card-preview img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.card-description {
+    max-height: 128px;
+    min-height: 128px;
+    border-bottom: 1px solid #eeeeee;
+    padding: 5px 15px 5px 15px;
+    overflow: hidden;
+}
+
+.card-description h5 {
+    line-height: 1.2em;
+    margin: 8px 0px 8px 0px;
+}
+
+.card-description p {
+    line-height: 1.5em;
+}
+
+.card-buttons {
+    min-height: 26px;
+    max-height: 26px;
+    margin: 7px 15px 7px 15px;
+    font-size: 18px;
+    color: #616161;
+}
+
+.card-buttons .votes {
+    display: inline-block;
+    vertical-align: 20%;
+}
+
+.card-buttons .votes-no-user {
+    padding-top: 2px;
+}
+
+.delete-button, .edit-button {
+    display: inline-block;
+    cursor: pointer;
     float: right;
+    padding-left: 10px;
+    z-index: 99;
 }
 
-.edit-delete-menu {
-    background: white;
-    height: 36px;
-    width: 86px;
-    border-radius: 18px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    box-shadow: 2px 3px 2px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.12);
-}
-
-.edit-delete-menu.inside-guide {
-    top: 20px;
-    right: 30px;
-}
-
-.edit-delete-menu i {
-    margin-top: 6px;
-    margin-bottom: 6px;
-}
-
-.edit-delete-menu a:link,
-.edit-delete-menu a:visited,
-.edit-delete-menu a:hover,
-.edit-delete-menu a:active {
-    color: black;
-}
-
-.delete-guide {
-    margin-left: 9px;
-    cursor: pointer
-}
-
-.vote-guide {
-    cursor: pointer
-}
-
-.edit-guide {
-    border-left: 1px solid #ccc;
-    padding-left: 9px;
-    margin-left: 4px;
+.delete-guide-icon, .vote-guide-icon {
+    cursor: pointer;
 }
 
 .form-delete, .form-vote {
-    display: inline;
+    display: inline-block;
 }
 
 .pagination a {
@@ -182,6 +209,14 @@ div.main-sector-1 .guide h3 {
     margin-top: 0px;
     display: inline;
     color: #424242;
+}
+
+.edit-delete-menu {
+    width: 100%;
+}
+
+.edit-delete-menu a {
+    margin-right: 10px;
 }
 
 .django-ckeditor-widget {
