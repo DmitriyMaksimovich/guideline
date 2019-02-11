@@ -184,6 +184,16 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
         'extraPlugins': 'codesnippet,tableresize,tabletools'
     },
+    'comment': {
+        'toolbar': 'comment',
+        'toolbar_comment': [
+            ['Bold', 'Italic', 'Underline', 'Strike'],
+            ['NumberedList', 'BulletedList'],
+            ['Link'],
+        ],
+        'height': 100,
+        'width': '100%',
+    }
 }
 
 # Activate Django-Heroku.
