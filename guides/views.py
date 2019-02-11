@@ -1,11 +1,11 @@
 import datetime
 from django.views import generic
 from django.db.models import Count
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from .models import Guide, Section
-from .forms import GuideForm, get_guide_section, get_tags_objects
+from .models import Guide, Section, Comment
+from .forms import CommentForm, GuideForm, get_guide_section, get_tags_objects
 
 
 class IndexView(generic.ListView):
@@ -62,15 +62,38 @@ class MyGuidesView(IndexView):
         return Guide.objects.filter(author=self.request.user.pk).order_by('-pub_date')
 
 
-class GuideView(generic.DetailView):
+class GuideView(generic.edit.FormMixin, generic.DetailView):
     model = Guide
     template_name = 'guides/guide.html'
     context_object_name = 'guide'
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse('guides:guide', kwargs={'pk': self.object.pk}) + "#ckeditor"
 
     def get_context_data(self, **kwargs):
         context = super(GuideView, self).get_context_data(**kwargs)
         context['sections'] = Section.objects.annotate(num_guides=Count('guide'))[:10]
+        context['comments'] = Comment.objects.filter(guide=self.object.pk)
+        context['form'] = self.get_form()
         return context
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save(self.request.user, self.object)
+        return super(GuideView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(GuideView, self).form_invalid(form)
 
     def get_object(self, queryset=None):
         target_object = super(GuideView, self).get_object()
@@ -142,6 +165,18 @@ class EditGuideView(generic.edit.UpdateView):
         context["existing_sections"] = sections_list
         context["action"] = 'edit'
         return context
+
+
+def vote_for_comment(request):
+    referer = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        comment_pk = request.POST['comment_pk']
+        target_comment = get_object_or_404(Comment, pk=comment_pk)
+        if request.user not in target_comment.user_voted.all():
+            target_comment.user_voted.add(request.user)
+        else:
+            target_comment.user_voted.remove(request.user)
+    return HttpResponseRedirect(referer + '#comment_{}'.format(target_comment.pk))
 
 
 def vote(request):

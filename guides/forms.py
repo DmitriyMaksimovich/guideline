@@ -1,6 +1,22 @@
 from django.forms import ModelForm
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Guide, Section, Tag
+from .models import Guide, Section, Tag, Comment
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment_text']
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+
+    def save(self, user, guide):
+        comment = super(CommentForm, self).save(commit=False)
+        comment.author = user
+        comment.guide = guide
+        comment.save()
+        return comment
 
 
 class GuideForm(ModelForm):

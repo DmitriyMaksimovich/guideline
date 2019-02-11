@@ -140,7 +140,6 @@ main.mdl-layout__content {
     cursor: pointer;
     float: right;
     padding-left: 10px;
-    z-index: 99;
 }
 
 .delete-guide-icon, .vote-guide-icon {
@@ -208,6 +207,61 @@ div.guide_creation {
 
 .django-ckeditor-widget {
     width: 100%;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.25),
+                0 0 1px rgba(0,0,0,0.2);
+}
+
+.comments-area {
+    margin: 20px;
+}
+
+.comments-area hr {
+    margin-bottom: 20px;
+}
+
+.comment {
+    background: white;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.25),
+                0 0 1px rgba(0,0,0,0.2);
+    margin: 10px 0px;
+    padding: 20px;
+    font-family: Roboto;
+    color: #424242;
+}
+
+.comment-vote {
+    float: right;
+}
+
+.comment-vote .votes {
+    display: inline-block;
+    vertical-align: 20%;
+    margin-right: 5px;
+}
+
+.comment-vote form {
+    display: inline-block;
+}
+
+.comment-vote form label {
+    cursor: pointer;
+}
+
+.comment_author {
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.comment_text {
+    padding-top: 10px;
+}
+
+.comment-create {
+    margin-top: 20px;
+}
+
+.comment-create form .mdl-button {
+    margin-top: 15px;
 }
 
 .mdl-textfield.is-invalid .mdl-textfield__input {

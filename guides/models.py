@@ -37,3 +37,14 @@ class Guide(models.Model):
         tags_list = [tag_obj.tag for tag_obj in tags_query]
         tags_string = ', '.join(tags_list)
         return tags_string
+
+
+class Comment(models.Model):
+    comment_text = RichTextField(config_name='comment')
+    pub_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
+    user_voted = models.ManyToManyField(CustomUser, related_name='comment_voted', blank=True)
+    guide = models.ForeignKey(Guide, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{} by {}".format(self.comment_text, self.author)

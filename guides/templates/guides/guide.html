@@ -42,5 +42,44 @@
         </div>
         {% endif %}
     </div>
+    <div class="comments-area">
+        <hr>
+        {% for comment in comments %}
+        <div class="comment">
+            {% if user.is_authenticated %}
+            <div class="comment-vote">
+                <div class="votes">{{ comment.user_voted.all|length }}</div>
+                <form action="{% url 'guides:vote_for_comment' %}" method="post" class="form-vote">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_pk" value="{{ comment.pk }}">
+                    <input type="submit" class="hidden-button" id="vote_for_comment_{{ comment.pk }}">
+                    <label for="vote_for_comment_{{ comment.pk }}">
+                        <i class="material-icons comment-guide-icon">thumb_up</i>
+                    </label>
+                </form>
+            </div>
+            {% endif %}
+            <a name="comment_{{ comment.pk }}" href="#comment_{{ comment.pk }}"></a>
+            <div class="comment_author">
+                 {{ comment.author }} posted at {{ comment.pub_date }}:
+            </div>
+            <div class="comment_text">
+                {{ comment.comment_text|safe }}
+            </div>
+        </div>
+        {% endfor %}
+        {% if user.is_authenticated %}
+        <a name="ckeditor" href="#ckeditor"></a>
+        <div class="comment-create">
+            <form action="{% url 'guides:guide' guide.pk %}" method="POST">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.comment_text }}
+                <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
 </div>
 {% endblock %}
