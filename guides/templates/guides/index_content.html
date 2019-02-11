@@ -19,6 +19,7 @@
     <div class="main-sector-1">
         {% for guide in guides_list %}
         <div class="card-square">
+            <a name="guide_{{ guide.pk }}" href="#guide_{{ guide.pk }}"></a>
             <a href="{% url 'guides:guide' guide.pk %}">
                 <div class="card-preview">
                     <img src="{{ guide.preview }}">

@@ -184,8 +184,11 @@ def vote(request):
     if request.method == 'POST':
         guide_pk = request.POST['guide_pk']
         target_guide = get_object_or_404(Guide, pk=guide_pk)
-        target_guide.user_voted.add(request.user)
-    return HttpResponseRedirect(referer)
+        if request.user not in target_guide.user_voted.all():
+            target_guide.user_voted.add(request.user)
+        else:
+            target_guide.user_voted.remove(request.user)
+    return HttpResponseRedirect(referer + '#guide_{}'.format(target_guide.pk))
 
 
 def delete_guide(request):
