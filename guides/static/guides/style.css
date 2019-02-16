@@ -190,6 +190,8 @@ div.guide_creation {
 
 .page-content .guide {
     margin: 20px;
+    font-family: Roboto;
+    color: #424242;
 }
 
 .page-content .guide h3 {
@@ -341,12 +343,53 @@ input:-webkit-autofill {
     color: #ffffff;
 }
 
-table {
+.guide table {
     border-collapse: collapse !important;
     border: 0px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.25),
+                0 0 1px rgba(0,0,0,0.2);
+    background-color: white;
 }
 
-td, th {
+.guide table caption {
+    padding: 10px;
+}
+
+.guide thead tr th {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+}
+
+.guide tbody tr td {
+    text-align: left;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.guide td, th {
     border-color: #bdbdbd;
-    padding: 5px;
+    padding: 10px;
+}
+
+.guide pre {
+    padding: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.25),
+                0 0 1px rgba(0,0,0,0.2);
+    background-color: white;
+}
+
+.guide blockquote {
+    padding-left: 20px;
+    margin-left: 0px;
+    border-left: 5px solid #bdbdbd;
+}
+
+.guide blockquote::after, blockquote::before {
+    content: '';
+}
+
+body table {
+    border-collapse: collapse;
 }
