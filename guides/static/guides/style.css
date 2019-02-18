@@ -390,6 +390,7 @@ input:-webkit-autofill {
     content: '';
 }
 
-body table {
-    border-collapse: collapse;
+.guide img {
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.25),
+                0 0 1px rgba(0,0,0,0.2);
 }
